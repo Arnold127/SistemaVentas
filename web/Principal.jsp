@@ -4,6 +4,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+         <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-info">
@@ -13,13 +15,13 @@
                         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none" class="btn btn-outliine-light" href="Controlador?menu=producto" target="myFrame">Producto</a>
+                        <a style="margin-left: 10px; border: none" class="btn btn-outliine-light" href="Controlador?menu=Producto&accion=Listar" target="myFrame">Producto</a>
                     </li>
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none" class="btn btn-outliine-light" href="Controlador?menu=Empleado&accion=Listar" target="myFrame">Empleado</a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none" class="btn btn-outliine-light" href="Controlador?menu=Cliente" target="myFrame">Clientes</a>
+                        <a style="margin-left: 10px; border: none" class="btn btn-outliine-light" href="Controlador?menu=Cliente&accion=Listar" target="myFrame">Clientes</a>
                     </li>
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none" class="btn btn-outliine-light" href="Controlador?menu=NuevaVenta&accion=default" target="myFrame">Nueva Venta</a>
@@ -32,7 +34,6 @@
                     <div class="dropdown-menu text-center">
                         <a class="dropdown-item" href="#"><img src="img/user.png" alt="10" width="60"/></a>
                         <a class="dropdown-item" href="#">${usuario.getUser()}</a>
-                        <a class="dropdown-item" href="#">usuario@gmail.com</a>
                         <div class="dropdown-divider"></div>
                         <form action="Validar" method="POST">
                             <button name="accion" value="Salir" class="dropdown-item" href="#">Salir</button>

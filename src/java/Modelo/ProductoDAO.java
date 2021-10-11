@@ -4,6 +4,7 @@ import Config.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class ProductoDAO {
                 p.setStock(rs.getInt(4));
                 p.setEstado(rs.getString(5));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return p;
     }
@@ -45,8 +46,8 @@ public class ProductoDAO {
             ps = con.prepareStatement(sql);
             ps.setInt(1, stock);
             ps.setInt(2, id);
-            ps.executeQuery();
-        } catch (Exception e) {
+            ps.executeUpdate();
+        } catch (SQLException e) {
         }
         return r;
     }
@@ -67,7 +68,7 @@ public class ProductoDAO {
                 pr.setEstado(rs.getString(5));
                 lista.add(pr);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return lista;
     }
@@ -89,7 +90,7 @@ public class ProductoDAO {
 
     public Producto listarId(int id) {
         Producto pr = new Producto();
-        String sql = "select * from producto where IdProducto" + id;
+        String sql = "select * from producto where IdProducto=" + id;
         try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -101,13 +102,13 @@ public class ProductoDAO {
                 pr.setStock(rs.getInt(4));
                 pr.setEstado(rs.getString(5));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return pr;
     }
 
     public int actualizar(Producto pr) {
-        String sql = "update producto set Nombre=?, Precio=?, Stock=?, Estado=? where IdProducto=?";
+        String sql = "update producto set Nombres=?, Precio=?, Stock=?, Estado=? where IdProducto=?";
         try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -117,7 +118,7 @@ public class ProductoDAO {
             ps.setString(4, pr.getEstado());
             ps.setInt(5, pr.getId());
             ps.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return r;
     }

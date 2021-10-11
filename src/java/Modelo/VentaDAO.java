@@ -5,7 +5,8 @@ import Config.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import jdk.jpackage.internal.WinExeBundler;
+import java.sql.SQLException;
+
 
 public class VentaDAO {
     Connection con;
@@ -24,7 +25,8 @@ public class VentaDAO {
             while(rs.next()){
                 numeroserie=rs.getString(1);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.out.println(e.toString());
         }
         return numeroserie;
     }
@@ -38,7 +40,8 @@ public class VentaDAO {
             while(rs.next()){
                 idventas=rs.getString(1);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.out.println(e.toString());
         }
         return idventas;
     }
@@ -53,13 +56,14 @@ public class VentaDAO {
             ps.setString(4, ve.getFecha());
             ps.setDouble(5, ve.getPrecio());
             ps.setString(6, ve.getEstado());
-            ps.executeQuery();
-        } catch (Exception e) {
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
         }
         return r;
     }
     public int guardarDetalleVentas(Venta venta){
-        String sql="insert into detalle_ventas(IdVentas, IdProducto, Cantidad, Precio)values(?,?,?,?)";
+        String sql="insert into detalle_ventas(IdVentas, IdProducto, Cantidad, PrecioVenta)values(?,?,?,?)";
         try {
             con=cn.Conexion();
             ps=con.prepareStatement(sql);
@@ -67,8 +71,8 @@ public class VentaDAO {
             ps.setInt(2, venta.getIdproducto());
             ps.setInt(3, venta.getCantidad());
             ps.setDouble(4, venta.getPrecio());
-            ps.executeQuery();
-        } catch (Exception e) {
+            ps.executeUpdate();
+        } catch (SQLException e) {
         }
         return r;
     }

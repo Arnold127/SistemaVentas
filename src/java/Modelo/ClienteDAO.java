@@ -4,6 +4,7 @@ import Config.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class ClienteDAO {
                 c.setDir(rs.getString(4));
                 c.setEstado(rs.getString(5));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return c;
     }
@@ -60,7 +61,7 @@ public class ClienteDAO {
     }
 
     public int agregar(Cliente c) {
-        String sql = "insert into cliente(Dni, Nombre, Direccion, Estado)values(?,?,?,?)";
+        String sql = "insert into cliente(Dni, Nombres, Direccion, Estado)values(?,?,?,?)";
         try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -69,14 +70,14 @@ public class ClienteDAO {
             ps.setString(3, c.getDir());
             ps.setString(4, c.getEstado());
             ps.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return r;
     }
     
     public Cliente listarId(int id){
         Cliente c=new Cliente();
-        String sql="select * from cliente where IdCliente"+id;
+        String sql="select * from cliente where IdCliente="+id;
         try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -87,13 +88,13 @@ public class ClienteDAO {
                 c.setDir(rs.getString(4));
                 c.setEstado(rs.getString(5));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return c;
     }
 
     public int actualizar(Cliente c) {
-        String sql = "update cliente set Dni=?, Nombre=?, Direccion=?, Estado=? where IdCliente=?";
+        String sql = "update cliente set Dni=?, Nombres=?, Direccion=?, Estado=? where IdCliente=?";
         try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -101,20 +102,20 @@ public class ClienteDAO {
             ps.setString(2, c.getNom());
             ps.setString(3, c.getDir());
             ps.setString(4, c.getEstado());
-            ps.setInt(6, c.getId());
+            ps.setInt(5, c.getId());
             ps.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return r;
     }
 
     public void delete(int id) {
-        String sql="delete from cliente where IdEmpleado="+id;
+        String sql="delete from cliente where IdCliente="+id;
         try {
             con=cn.Conexion();
             ps = con.prepareStatement(sql);
             ps.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
     }
 }

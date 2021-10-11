@@ -4,6 +4,7 @@ import Config.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +35,8 @@ public class EmpleadoDAO {
                 em.setDni(rs.getString("Dni"));
                 em.setNom(rs.getString("Nombres"));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.out.println(e.toString());
         }
         return em;
     }
@@ -62,7 +64,7 @@ public class EmpleadoDAO {
     }
 
     public int agregar(Empleado em) {
-        String sql = "insert into empleado(Dni, Nombre, Telefono, Estado, User)values(?,?,?,?,?)";
+        String sql = "insert into empleado(Dni, Nombres, Telefono, Estado, User)values(?,?,?,?,?)";
         try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -72,14 +74,15 @@ public class EmpleadoDAO {
             ps.setString(4, em.getEstado());
             ps.setString(5, em.getUser());
             ps.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.out.println(e.toString());
         }
         return r;
     }
     
     public Empleado listarId(int id){
         Empleado emp=new Empleado();
-        String sql="select * from empleado where IdEmpleado"+id;
+        String sql="select * from empleado where IdEmpleado="+id;
         try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -91,13 +94,14 @@ public class EmpleadoDAO {
                 emp.setEstado(rs.getString(5));
                 emp.setUser(rs.getString(6));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.out.println(e.toString());
         }
         return emp;
     }
 
     public int actualizar(Empleado em) {
-        String sql = "update empleado set Dni=?, Nombre=?, Telefono=?, Estado=?, User=? where IdEmpleado=?";
+        String sql = "update empleado set Dni=?, Nombres=?, Telefono=?, Estado=?, User=? where IdEmpleado=?";
         try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -108,7 +112,9 @@ public class EmpleadoDAO {
             ps.setString(5, em.getUser());
             ps.setInt(6, em.getId());
             ps.executeUpdate();
-        } catch (Exception e) {
+            
+        } catch (SQLException e) {
+            System.out.println(e.toString());
         }
         return r;
     }
@@ -119,7 +125,8 @@ public class EmpleadoDAO {
             con=cn.Conexion();
             ps = con.prepareStatement(sql);
             ps.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.out.println(e.toString());
         }
     }
 }

@@ -12,22 +12,22 @@
         <div class="d-flex">
             <div class="card" col-sm-4>
                 <div class="card-body">
-                    <form action="Controlador?menu=Producto" method="POST">
+                    <form action="Controlador?menu=Cliente" method="POST">
+                        <div class="form-group">
+                            <label>Dni</label>
+                            <input type="text" value="${cliente.getDni()}" name="txtDni" class="form-control">
+                        </div>
                         <div class="form-group">
                             <label>Nombres</label>
-                            <input type="text" value="${producto.getNom()}" name="txtNombres" class="form-control">
+                            <input type="text" value="${cliente.getNom()}" name="txtNombres" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>Precio</label>
-                            <input type="text" value="${producto.getPre()}" name="txtPre" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>Stock</label>
-                            <input type="text" value="${producto.getStock()}" name="txtStock" class="form-control">
+                            <label>Direccion</label>
+                            <input type="text" value="${cliente.getDir()}" name="txtTel" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Estado</label>
-                            <input type="text" value="${empleado.getEstado()}" name="txtEstado" class="form-control">
+                            <input type="text" value="${cliente.getEstado()}" name="txtEstado" class="form-control">
                         </div>
                         <input type="submit" name="accion" value="Agregar" class="btn btn-info">
                         <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
@@ -38,24 +38,23 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
+                            <th>DNI</th>
                             <th>NOMBRE</th>
-                            <th>PRECIO</th>
-                            <th>STOCK</th>
+                            <th>DIRECCION</th>
                             <th>ESTADO</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="em" items="${clientes}">
+                    <c:forEach var="c" items="${clientes}">
                     <tr>
-                        <td>${p.getId()}</td>
-                        <td>${p.getNom()}</td>
-                        <td>${p.getPrecio()}</td>
-                        <td>${p.getStock()}</td>
-                        <td>${p.getEstado()}</td>
+                        <td>${c.getDni()}</td>
+                        <td>${c.getNom()}</td>
+                        <td>${c.getDir()}</td>
+                        <td>${c.getEstado()}</td>
                         <td>
-                            <a class="btn btn-warning" href="Controlador?menu=Producto&accion=Editar&id=${p.getId()}">Editar</a>
-                            <a class="btn btn-warning" href="Controlador?menu=Producto&accion=delete&id=${p.getId()}">delete</a>
+                            <a class="btn btn-warning" href="Controlador?menu=Cliente&accion=Editar&id=${c.getId()}">Editar</a>
+                            <a class="btn btn-warning" href="Controlador?menu=Cliente&accion=Delete&id=${c.getId()}">delete</a>
                         </td>
                     </tr>
                     </c:forEach>
